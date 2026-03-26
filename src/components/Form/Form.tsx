@@ -1,13 +1,21 @@
-import { useState } from 'react';
 import './Form.scss';
+import { useDispatch, useSelector } from 'react-redux';
+import { clearInputValue, setInputValue } from '../../feature/forminput';
+import type { RootState } from '../../store';
 
 export const Form = (props: { createNewToDo: Function }) => {
-	const [text, setText] = useState<string>('');
+	const dispatch = useDispatch();
+	const inputText = useSelector((state: RootState) => state.inputValue.value);
 
-	const formSubmit = () => {
-		if (text.trim()) {
-			props.createNewToDo(text);
-			setText('');
+	const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+		dispatch(setInputValue(event.target.value));
+	}
+
+	const formSubmit = (event: React.SyntheticEvent) => {
+		event.preventDefault();
+		if (inputText.trim()) {
+			props.createNewToDo(inputText);
+			dispatch(clearInputValue());
 		}
 	}
 
@@ -16,9 +24,9 @@ export const Form = (props: { createNewToDo: Function }) => {
 			<form action="#" onSubmit={formSubmit}>
 				<label>
 					<input
-						value={text}
+						value={inputText}
 						type="text"
-						onChange={(e) => setText(e.target.value)}
+						onChange={handleChange}
 					/>
 					<button></button>
 				</label>
