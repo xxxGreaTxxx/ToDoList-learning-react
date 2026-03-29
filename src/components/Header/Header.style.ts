@@ -19,6 +19,7 @@ export const HeaderContainer = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	position: relative;
 `;
 
 export const HeaderLink = styled(NavLink)`
@@ -28,5 +29,22 @@ export const HeaderLink = styled(NavLink)`
 
 	&.active {
 		color: #ffffff33;
+	}
+`;
+
+export const ThemeToggleButton = styled.button`
+	position: absolute;
+	right: 0;
+	top: 50%;
+	transform: translateY(-50%);
+	background-color: transparent;
+	border: 1px solid #fff;
+	color: #fff;
+	padding: 5px 10px;
+	border-radius: 5px;
+	cursor: pointer;
+
+	&:hover {
+		background-color: #ffffff33;
 	}
 `;
